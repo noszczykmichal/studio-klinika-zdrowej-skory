@@ -45,12 +45,30 @@ export default defineType({
       type: 'datetime',
     }),
     defineField({
-      name: 'body',
-      title: 'Body',
-      type: 'blockContent',
+      name: 'contentSections',
+      title: 'Content Sections',
+      type: 'array',
+      of: [
+        {
+          type: 'object',
+          name: 'section',
+          title: 'Section',
+          fields: [
+            {
+              name: 'paragraphTitle',
+              title: 'Paragraph Title',
+              type: 'string',
+            },
+            {
+              name: 'content',
+              title: 'Content',
+              type: 'text',
+            },
+          ],
+        },
+      ],
     }),
   ],
-
   preview: {
     select: {
       title: 'title',
