@@ -7,66 +7,74 @@ export default defineType({
   fields: [
     defineField({
       name: 'title',
-      title: 'Title',
+      title: 'Tytuł',
       type: 'string',
+      validation: (Rule) => Rule.required().error('Proszę uzupełnić pole.'),
     }),
     defineField({
       name: 'slug',
-      title: 'Slug',
+      title: 'Slug dla posta',
       type: 'slug',
       options: {
         source: 'title',
         maxLength: 96,
       },
+      validation: (Rule) => Rule.required().error('Proszę wygenerować pole.'),
     }),
     defineField({
       name: 'author',
-      title: 'Author',
+      title: 'Autor',
       type: 'reference',
       to: {type: 'author'},
+      validation: (Rule) => Rule.required().error('Proszę wybrać jedną opcję.'),
     }),
     defineField({
       name: 'mainImage',
-      title: 'Main image',
+      title: 'Główny obraz',
       type: 'image',
       options: {
         hotspot: true,
       },
+      validation: (Rule) => Rule.required().error('Proszę wybrać plik.'),
     }),
     defineField({
-      name: 'categories',
-      title: 'Categories',
-      type: 'array',
-      of: [{type: 'reference', to: {type: 'category'}}],
+      name: 'category',
+      title: 'Kategoria',
+      type: 'reference',
+      to: {type: 'category'},
+      validation: (Rule) => Rule.required().error('Proszę wybrać jedną opcję.'),
     }),
     defineField({
       name: 'publishedAt',
-      title: 'Published at',
+      title: 'Data publikacji',
       type: 'datetime',
+      validation: (Rule) => Rule.required().error('Proszę wybrać poprawną datę.'),
     }),
     defineField({
       name: 'contentSections',
-      title: 'Content Sections',
+      title: 'Sekcje posta',
       type: 'array',
       of: [
         {
           type: 'object',
           name: 'section',
-          title: 'Section',
+          title: 'Sekcja',
           fields: [
             {
               name: 'paragraphTitle',
-              title: 'Paragraph Title',
+              title: 'Tytuł paragrafu',
               type: 'string',
             },
             {
               name: 'content',
-              title: 'Content',
+              title: 'Tekst paragrafu',
               type: 'text',
             },
           ],
         },
       ],
+      validation: (Rule) =>
+        Rule.required().min(1).error('Post musi mieć co najmniej jedną sekcję.'),
     }),
   ],
   preview: {
