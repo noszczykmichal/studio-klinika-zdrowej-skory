@@ -22,6 +22,12 @@ export default defineType({
       validation: (Rule) => Rule.required().error('Proszę wygenerować pole.'),
     }),
     defineField({
+      name: 'summary',
+      title: 'Podsumowanie',
+      type: 'string',
+      validation: (Rule) => Rule.required().error('Proszę uzupełnić pole.'),
+    }),
+    defineField({
       name: 'author',
       title: 'Autor',
       type: 'reference',
