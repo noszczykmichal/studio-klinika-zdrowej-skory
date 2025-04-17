@@ -21,6 +21,35 @@ export default defineType({
       },
       validation: (Rule) => Rule.required().error('Proszę wygenerować pole.'),
     }),
+
+    defineField({
+      name: 'treatmentGroup',
+      title: 'Grupa zabiegowa',
+      type: 'reference',
+      to: {type: 'treatmentGroup'},
+      validation: (Rule) =>
+        Rule.custom((value, context) => {
+          const other = context.document?.treatment
+          if (value && other) {
+            return 'Proszę wypełnić tylko jedno pole - "Grupa zabiegowa" lub "Zabieg", nie oba jednocześnie.'
+          }
+          return true
+        }),
+    }),
+    defineField({
+      name: 'treatment',
+      title: 'Zabieg',
+      type: 'reference',
+      to: {type: 'treatment'},
+      validation: (Rule) =>
+        Rule.custom((value, context) => {
+          const other = context.document?.treatmentGroup
+          if (value && other) {
+            return 'Proszę wypełnić tylko jedno pole - "Grupa zabiegowa" lub "Zabieg", nie oba jednocześnie.'
+          }
+          return true
+        }),
+    }),
     defineField({
       name: 'summary',
       title: 'Podsumowanie',
