@@ -73,6 +73,12 @@ export default defineType({
       validation: (Rule) => Rule.required().error('Proszę wybrać plik.'),
     }),
     defineField({
+      name: 'altForMainImage',
+      title: 'Alt dla głównej grafiki',
+      type: 'string',
+      validation: (Rule) => Rule.required().error('Proszę uzupełnić pole.'),
+    }),
+    defineField({
       name: 'category',
       title: 'Kategoria',
       type: 'reference',
