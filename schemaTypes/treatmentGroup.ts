@@ -32,9 +32,27 @@ export default defineType({
       validation: (Rule) => Rule.required().error('Proszę wybrać plik.'),
     }),
     defineField({
+      name: 'altForMainImage',
+      title: 'Opis głównej grafiki',
+      type: 'string',
+      validation: (Rule) =>
+        Rule.custom((value) => {
+          if (!value || value.trim() === '') {
+            return 'Proszę uzupełnić pole.'
+          }
+
+          if (!/\.\s*$/.test(value)) {
+            return 'Opis powinien kończyć się kropką.'
+          }
+
+          return true
+        }),
+    }),
+    defineField({
       name: 'description',
       title: 'Opis',
       type: 'blockContent',
+      validation: (Rule) => Rule.required().error('Proszę uzupełnić pole.'),
     }),
   ],
 })

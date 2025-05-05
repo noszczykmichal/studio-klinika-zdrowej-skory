@@ -63,7 +63,25 @@ export default defineType({
     defineArrayMember({
       type: 'image',
       options: {hotspot: true},
-      fields: [defineField({name: 'alt', type: 'string', title: 'Alt dla grafiki'})],
+      fields: [
+        defineField({
+          name: 'alt',
+          type: 'string',
+          title: 'Opis dla grafiki',
+          validation: (Rule) =>
+            Rule.custom((value) => {
+              if (!value || value.trim() === '') {
+                return 'Proszę uzupełnić pole.'
+              }
+
+              if (!/\.\s*$/.test(value)) {
+                return 'Opis powinien kończyć się kropką.'
+              }
+
+              return true
+            }),
+        }),
+      ],
     }),
   ],
 })
