@@ -26,7 +26,17 @@ export default defineType({
       name: 'summary',
       title: 'Podsumowanie',
       type: 'string',
-      validation: (Rule) => Rule.required().error('Proszę uzupełnić pole.'),
+      validation: (Rule) =>
+        Rule.custom((value) => {
+          if (!value || value.trim() === '') {
+            return 'Proszę uzupełnić pole.'
+          }
+
+          if (value.length > 290) {
+            return `Maksymalna długość tekstu to 290 znaków. Aktualna długość to ${value.length} znaków.`
+          }
+          return true
+        }),
     }),
     defineField({
       name: 'treatmentGroup',
@@ -46,9 +56,20 @@ export default defineType({
     }),
     defineField({
       name: 'altForMainImage',
-      title: 'Alt dla głównej grafiki',
+      title: 'Opis głównej grafiki',
       type: 'string',
-      validation: (Rule) => Rule.required().error('Proszę uzupełnić pole.'),
+      validation: (Rule) =>
+        Rule.custom((value) => {
+          if (!value || value.trim() === '') {
+            return 'Proszę uzupełnić pole.'
+          }
+
+          if (!/\.\s*$/.test(value)) {
+            return 'Opis powinien kończyć się kropką.'
+          }
+
+          return true
+        }),
     }),
     defineField({
       name: 'description',
