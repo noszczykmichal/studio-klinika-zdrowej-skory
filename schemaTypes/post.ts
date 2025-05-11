@@ -54,17 +54,7 @@ export default defineType({
       name: 'summary',
       title: 'Podsumowanie',
       type: 'string',
-      validation: (Rule) =>
-        Rule.custom((value) => {
-          if (!value || value.trim() === '') {
-            return 'Proszę uzupełnić pole.'
-          }
-
-          if (value.length > 290) {
-            return `Maksymalna długość tekstu to 290 znaków. Aktualna długość to ${value.length} znaków.`
-          }
-          return true
-        }),
+      validation: (Rule) => Rule.required().error('Proszę uzupełnić pole.'),
     }),
     defineField({
       name: 'author',
@@ -113,30 +103,10 @@ export default defineType({
       validation: (Rule) => Rule.required().error('Proszę wybrać poprawną datę.'),
     }),
     defineField({
-      name: 'contentSections',
-      title: 'Sekcje posta',
-      type: 'array',
-      of: [
-        {
-          type: 'object',
-          name: 'section',
-          title: 'Sekcja',
-          fields: [
-            {
-              name: 'paragraphTitle',
-              title: 'Tytuł paragrafu',
-              type: 'string',
-            },
-            {
-              name: 'content',
-              title: 'Tekst paragrafu',
-              type: 'text',
-            },
-          ],
-        },
-      ],
-      validation: (Rule) =>
-        Rule.required().min(1).error('Post musi mieć co najmniej jedną sekcję.'),
+      name: 'postContent',
+      title: 'Treść posta',
+      type: 'blockContent',
+      validation: (Rule) => Rule.required().error('Proszę uzupełnić pole.'),
     }),
   ],
   preview: {
