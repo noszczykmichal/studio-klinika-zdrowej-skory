@@ -1,0 +1,53 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - dev
+      - main
+  pull_request:
+    branches:
+      - dev
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+
+      - name: Cache Node.js modules
+        uses: actions/cache@v5
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: Install dependencies
+        run: npm install --legacy-peer-deps
+
+      - name: Build the project
+        run: npm run build
+
+      - name: Check if SANITY_AUTH_TOKEN is available
+        if: github.ref == 'refs/heads/main'
+        run: |
+          if [ -z "${{ secrets.SANITY_AUTH_TOKEN }}" ]; then
+          echo "SANITY_AUTH_TOKEN is missing!"
+          exit 1
+          fi
+
+      - name: Deploy to Sanity Studio
+        if: github.ref == 'refs/heads/main'
+        env:
+          SANITY_AUTH_TOKEN: ${{ secrets.SANITY_AUTH_TOKEN }}
+        run: |
+          npx sanity deploy --yes
