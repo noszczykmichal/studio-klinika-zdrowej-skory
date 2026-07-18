@@ -5,6 +5,7 @@ import author from "@/schemaTypes/author";
 import treatment from "@/schemaTypes/treatment";
 import treatmentGroup from "@/schemaTypes/treatmentGroup";
 import trainingCategory from "@/schemaTypes/trainingCategory";
+import training from "@/schemaTypes/training";
 
 export const schemaTypes = [
   post,
@@ -14,4 +15,5 @@ export const schemaTypes = [
   treatment,
   treatmentGroup,
   trainingCategory,
+  training,
 ];
