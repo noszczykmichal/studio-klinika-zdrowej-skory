@@ -1,74 +1,74 @@
-import {defineField, defineType} from 'sanity'
-import './blockContent'
+import { defineField, defineType } from "sanity";
+import "@/schemaTypes/blockContent";
 
 export default defineType({
-  name: 'treatmentGroup',
-  title: 'Grupa zabiegowa',
-  type: 'document',
+  name: "treatmentGroup",
+  title: "Grupa zabiegowa",
+  type: "document",
   fields: [
     defineField({
-      name: 'title',
-      title: 'Nazwa grupy',
-      type: 'string',
-      validation: (Rule) => Rule.required().error('Proszę uzupełnić pole.'),
+      name: "title",
+      title: "Nazwa grupy",
+      type: "string",
+      validation: (Rule) => Rule.required().error("Proszę uzupełnić pole."),
     }),
     defineField({
-      name: 'groupSlug',
-      title: 'Slug dla grupy',
-      type: 'slug',
+      name: "groupSlug",
+      title: "Slug dla grupy",
+      type: "slug",
       options: {
-        source: 'title',
+        source: "title",
         maxLength: 96,
       },
-      validation: (Rule) => Rule.required().error('Proszę wygenerować pole!'),
+      validation: (Rule) => Rule.required().error("Proszę wygenerować pole!"),
     }),
     defineField({
-      name: 'summary',
-      title: 'Podsumowanie',
-      type: 'string',
+      name: "summary",
+      title: "Podsumowanie",
+      type: "string",
       validation: (Rule) =>
         Rule.custom((value) => {
-          if (!value || value.trim() === '') {
-            return 'Proszę uzupełnić pole.'
+          if (!value || value.trim() === "") {
+            return "Proszę uzupełnić pole.";
           }
 
           if (value.length > 290) {
-            return `Maksymalna długość tekstu to 290 znaków. Aktualna długość to ${value.length} znaków.`
+            return `Maksymalna długość tekstu to 290 znaków. Aktualna długość to ${value.length} znaków.`;
           }
-          return true
+          return true;
         }),
     }),
     defineField({
-      name: 'mainImage',
-      title: 'Główny obraz',
-      type: 'image',
+      name: "mainImage",
+      title: "Główny obraz",
+      type: "image",
       options: {
         hotspot: true,
       },
-      validation: (Rule) => Rule.required().error('Proszę wybrać plik.'),
+      validation: (Rule) => Rule.required().error("Proszę wybrać plik."),
     }),
     defineField({
-      name: 'altForMainImage',
-      title: 'Opis głównej grafiki',
-      type: 'string',
+      name: "altForMainImage",
+      title: "Opis głównej grafiki",
+      type: "string",
       validation: (Rule) =>
         Rule.custom((value) => {
-          if (!value || value.trim() === '') {
-            return 'Proszę uzupełnić pole.'
+          if (!value || value.trim() === "") {
+            return "Proszę uzupełnić pole.";
           }
 
           if (!/\.\s*$/.test(value)) {
-            return 'Opis powinien kończyć się kropką.'
+            return "Opis powinien kończyć się kropką.";
           }
 
-          return true
+          return true;
         }),
     }),
     defineField({
-      name: 'description',
-      title: 'Opis',
-      type: 'blockContent',
-      validation: (Rule) => Rule.required().error('Proszę uzupełnić pole.'),
+      name: "description",
+      title: "Opis",
+      type: "blockContent",
+      validation: (Rule) => Rule.required().error("Proszę uzupełnić pole."),
     }),
   ],
-})
+});

@@ -1,8 +1,17 @@
-import blockContent from './blockContent'
-import category from './category'
-import post from './post'
-import author from './author'
-import treatment from './treatment'
-import treatmentGroup from './treatmentGroup'
+import blockContent from "@/schemaTypes/blockContent";
+import category from "@/schemaTypes/category";
+import post from "@/schemaTypes/post";
+import author from "@/schemaTypes/author";
+import treatment from "@/schemaTypes/treatment";
+import treatmentGroup from "@/schemaTypes/treatmentGroup";
+import trainingCategory from "@/schemaTypes/trainingCategory";
 
-export const schemaTypes = [post, author, category, blockContent, treatment, treatmentGroup]
+export const schemaTypes = [
+  post,
+  author,
+  category,
+  blockContent,
+  treatment,
+  treatmentGroup,
+  trainingCategory,
+];

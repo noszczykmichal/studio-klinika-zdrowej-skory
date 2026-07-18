@@ -2,19 +2,19 @@ import { defineField, defineType } from "sanity";
 import "@/schemaTypes/blockContent";
 
 export default defineType({
-  name: "treatment",
-  title: "Zabieg",
+  name: "training",
+  title: "Szkolenie",
   type: "document",
   fields: [
     defineField({
       name: "title",
-      title: "Nazwa zabiegu",
+      title: "Nazwa szkolenia",
       type: "string",
       validation: (Rule) => Rule.required().error("Proszę uzupełnić pole."),
     }),
     defineField({
-      name: "treatmentSlug",
-      title: "Slug dla zabiegu",
+      name: "trainingSlug",
+      title: "Slug dla szkolenia",
       type: "slug",
       options: {
         source: "title",
@@ -32,17 +32,17 @@ export default defineType({
             return "Proszę uzupełnić pole.";
           }
 
-          if (value.length > 290) {
-            return `Maksymalna długość tekstu to 290 znaków. Aktualna długość to ${value.length} znaków.`;
+          if (value.length > 550) {
+            return `Maksymalna długość tekstu to 550 znaków. Aktualna długość to ${value.length} znaków.`;
           }
           return true;
         }),
     }),
     defineField({
-      name: "treatmentGroup",
-      title: "Grupa zabiegowa",
+      name: "trainingCategory",
+      title: "Kategoria szkoleniowa",
       type: "reference",
-      to: { type: "treatmentGroup" },
+      to: { type: "trainingCategory" },
       validation: (Rule) => Rule.required().error("Proszę wybrać jedną opcję."),
     }),
     defineField({
