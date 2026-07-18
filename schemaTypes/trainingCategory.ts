@@ -1,8 +1,9 @@
 import { defineField, defineType } from "sanity";
+import "@/schemaTypes/blockContent";
 
 export default defineType({
-  name: "category",
-  title: "Kategoria",
+  name: "trainingCategory",
+  title: "Kategoria szkoleniowa",
   type: "document",
   fields: [
     defineField({
@@ -20,11 +21,6 @@ export default defineType({
         maxLength: 96,
       },
       validation: (Rule) => Rule.required().error("Proszę wygenerować pole!"),
-    }),
-    defineField({
-      name: "description",
-      title: "Opis",
-      type: "text",
     }),
   ],
 });
