@@ -1,4 +1,4 @@
-import { defineType, defineArrayMember, defineField } from "sanity";
+import { defineType, defineArrayMember } from "sanity";
 
 /**
  * This is the schema definition for the rich text fields used for
@@ -61,27 +61,11 @@ export default defineType({
     // primitive types such as 'string' and 'number' in the same array
     // as a block type.
     defineArrayMember({
-      type: "image",
-      options: { hotspot: true },
-      fields: [
-        defineField({
-          name: "alt",
-          type: "string",
-          title: "Opis dla grafiki",
-          validation: (Rule) =>
-            Rule.custom((value) => {
-              if (!value || value.trim() === "") {
-                return "Proszę uzupełnić pole.";
-              }
-
-              if (!/\.\s*$/.test(value)) {
-                return "Opis powinien kończyć się kropką.";
-              }
-
-              return true;
-            }),
-        }),
-      ],
+      type: "blockImage",
+    }),
+    defineArrayMember({
+      type: "gallery",
+      title: "Galeria zdjęć",
     }),
   ],
 });
