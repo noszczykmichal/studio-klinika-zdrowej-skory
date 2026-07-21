@@ -6,6 +6,8 @@ import treatment from "@/schemaTypes/treatment";
 import treatmentGroup from "@/schemaTypes/treatmentGroup";
 import trainingCategory from "@/schemaTypes/trainingCategory";
 import training from "@/schemaTypes/training";
+import gallery from "@/schemaTypes/gallery";
+import blockImage from "./blockImage";
 
 export const schemaTypes = [
   post,
@@ -16,4 +18,6 @@ export const schemaTypes = [
   treatmentGroup,
   trainingCategory,
   training,
+  gallery,
+  blockImage,
 ];
