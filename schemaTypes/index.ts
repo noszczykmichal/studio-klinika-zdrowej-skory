@@ -7,7 +7,7 @@ import treatmentGroup from "@/schemaTypes/treatmentGroup";
 import trainingCategory from "@/schemaTypes/trainingCategory";
 import training from "@/schemaTypes/training";
 import gallery from "@/schemaTypes/gallery";
-import blockImage from "./blockImage";
+import blockContentImage from "@/schemaTypes/blockContentImage";
 
 export const schemaTypes = [
   post,
@@ -19,5 +19,5 @@ export const schemaTypes = [
   trainingCategory,
   training,
   gallery,
-  blockImage,
+  blockContentImage,
 ];

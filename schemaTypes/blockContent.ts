@@ -61,7 +61,8 @@ export default defineType({
     // primitive types such as 'string' and 'number' in the same array
     // as a block type.
     defineArrayMember({
-      type: "blockImage",
+      type: "blockContentImage",
+      title: "Zdjęcie",
     }),
     defineArrayMember({
       type: "gallery",

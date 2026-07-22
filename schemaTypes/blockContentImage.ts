@@ -2,7 +2,7 @@ import { defineType, defineField } from "sanity";
 
 export default defineType({
   type: "image",
-  name: "blockImage",
+  name: "blockContentImage",
   options: { hotspot: true },
   fields: [
     defineField({
@@ -21,6 +21,20 @@ export default defineType({
 
           return true;
         }),
+    }),
+    defineField({
+      name: "size",
+      type: "string",
+      title: "Rozmiar zdjęcia",
+      options: {
+        list: [
+          { title: "Małe (50%)", value: "small" },
+          { title: "Średnie (75%)", value: "medium" },
+          { title: "Pełna szerokość", value: "full" },
+        ],
+        layout: "radio",
+      },
+      initialValue: "full",
     }),
   ],
 });
