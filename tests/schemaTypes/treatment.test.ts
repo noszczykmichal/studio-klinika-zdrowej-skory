@@ -1,35 +1,11 @@
 import { describe, it, expect } from "vitest";
+
 import treatmentSchema from "@/schemaTypes/treatment";
-
-const mockRule = {
-  required: function () {
-    return this;
-  },
-  error: function () {
-    return this;
-  },
-  custom: function (fn: any) {
-    return fn;
-  },
-};
-
-const getValidator = (fieldName: string) => {
-  const field = treatmentSchema.fields.find((f: any) => f.name === fieldName);
-  if (!field || !field.validation)
-    throw new Error(`Field ${fieldName} not found or has no validation`);
-
-  if (typeof field.validation === "function") {
-    return field.validation(mockRule as any) as unknown as (
-      value: string | undefined,
-    ) => true | string;
-  }
-
-  throw new Error(`Validation for ${fieldName} is not a function`);
-};
+import { getValidator } from "@/utils/testUtils";
 
 describe("Treatment Schema Validation", () => {
   describe("summary field", () => {
-    const validateSummary = getValidator("summary");
+    const validateSummary = getValidator(treatmentSchema, "summary");
 
     it("should return an error if the value is empty or only whitespace", () => {
       expect(validateSummary("")).toBe("Proszę uzupełnić pole.");
@@ -51,7 +27,7 @@ describe("Treatment Schema Validation", () => {
   });
 
   describe("altForMainImage field", () => {
-    const validateAlt = getValidator("altForMainImage");
+    const validateAlt = getValidator(treatmentSchema, "altForMainImage");
 
     it("should return an error if the value is empty or only whitespace", () => {
       expect(validateAlt("")).toBe("Proszę uzupełnić pole.");

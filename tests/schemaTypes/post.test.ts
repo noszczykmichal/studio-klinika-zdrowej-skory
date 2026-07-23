@@ -1,40 +1,11 @@
 import { describe, it, expect } from "vitest";
+
 import postSchema from "@/schemaTypes/post";
-
-const mockRule = {
-  required: function () {
-    return this;
-  },
-  error: function () {
-    return this;
-  },
-
-  custom: function (fn: any) {
-    return fn;
-  },
-};
-
-// 2. Helper to find a field by name and extract its validation logic
-const getValidator = (fieldName: string) => {
-  const field = postSchema.fields.find((f: any) => f.name === fieldName);
-  if (!field || !field.validation)
-    throw new Error(`Field ${fieldName} not found or has no validation`);
-
-  // Tell TypeScript to only call it if it is actually a function
-  if (typeof field.validation === "function") {
-    // Add the "as (...)" cast right here at the end
-    return field.validation(mockRule as any) as unknown as (
-      value: any,
-      context?: any,
-    ) => true | string;
-  }
-
-  throw new Error(`Validation for ${fieldName} is not a function`);
-};
+import { getValidator } from "@/utils/testUtils";
 
 describe("Post Schema Validation", () => {
   describe("treatmentGroup field", () => {
-    const validateTreatmentGroup = getValidator("treatmentGroup");
+    const validateTreatmentGroup = getValidator(postSchema, "treatmentGroup");
 
     it("should return an error if both treatmentGroup and treatment are selected", () => {
       const mockValue = { _type: "reference", _ref: "group-123" };
@@ -84,7 +55,7 @@ describe("Post Schema Validation", () => {
   });
 
   describe("altForMainImage field", () => {
-    const validateAlt = getValidator("altForMainImage");
+    const validateAlt = getValidator(postSchema, "altForMainImage");
 
     it("should return an error if the value is empty or only whitespace", () => {
       expect(validateAlt("")).toBe("Proszę uzupełnić pole.");
