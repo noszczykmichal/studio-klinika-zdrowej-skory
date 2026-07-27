@@ -23,10 +23,10 @@ export default defineType({
     }),
 
     defineField({
-      name: "treatmentGroup",
-      title: "Grupa zabiegowa",
+      name: "treatmentCategory",
+      title: "Kategoria zabiegowa",
       type: "reference",
-      to: { type: "treatmentGroup" },
+      to: { type: "treatmentCategory" },
       validation: (Rule) =>
         Rule.custom((value, context) => {
           const other = context.document?.treatment;

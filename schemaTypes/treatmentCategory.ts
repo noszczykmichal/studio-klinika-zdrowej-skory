@@ -2,19 +2,19 @@ import { defineField, defineType } from "sanity";
 import "@/schemaTypes/blockContent";
 
 export default defineType({
-  name: "treatmentGroup",
-  title: "Grupa zabiegowa",
+  name: "treatmentCategory",
+  title: "Kategoria zabiegowa",
   type: "document",
   fields: [
     defineField({
       name: "title",
-      title: "Nazwa grupy",
+      title: "Nazwa kategorii",
       type: "string",
       validation: (Rule) => Rule.required().error("Proszę uzupełnić pole."),
     }),
     defineField({
-      name: "groupSlug",
-      title: "Slug dla grupy",
+      name: "categorySlug",
+      title: "Slug dla kategorii",
       type: "slug",
       options: {
         source: "title",

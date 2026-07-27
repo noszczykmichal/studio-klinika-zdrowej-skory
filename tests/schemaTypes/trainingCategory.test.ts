@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
 
-import trainingCategorySchema from "@/schemaTypes/treatmentGroup";
+import trainingCategorySchema from "@/schemaTypes/treatmentCategory";
 import { getValidator } from "@/utils/testUtils";
 
 describe("Training category Schema Validation", () => {
