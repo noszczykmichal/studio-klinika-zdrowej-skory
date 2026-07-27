@@ -1,11 +1,11 @@
 import { describe, it, expect } from "vitest";
 
-import treatmentGroupSchema from "@/schemaTypes/treatmentGroup";
+import treatmentCategorySchema from "@/schemaTypes/treatmentCategory";
 import { getValidator } from "@/utils/testUtils";
 
-describe("Treatment group Schema Validation", () => {
+describe("Treatment category Schema Validation", () => {
   describe("summary field", () => {
-    const validateSummary = getValidator(treatmentGroupSchema, "summary");
+    const validateSummary = getValidator(treatmentCategorySchema, "summary");
 
     it("should return an error if the value is empty or only whitespace", () => {
       expect(validateSummary("")).toBe("Proszę uzupełnić pole.");
@@ -27,7 +27,10 @@ describe("Treatment group Schema Validation", () => {
   });
 
   describe("altForMainImage field", () => {
-    const validateAlt = getValidator(treatmentGroupSchema, "altForMainImage");
+    const validateAlt = getValidator(
+      treatmentCategorySchema,
+      "altForMainImage",
+    );
 
     it("should return an error if the value is empty or only whitespace", () => {
       expect(validateAlt("")).toBe("Proszę uzupełnić pole.");

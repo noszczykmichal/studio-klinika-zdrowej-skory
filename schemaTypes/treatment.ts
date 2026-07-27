@@ -1,6 +1,8 @@
 import { defineField, defineType } from "sanity";
 import "@/schemaTypes/blockContent";
 
+import { altValidator, lengthValidatorWithLength } from "@/utils/validators";
+
 export default defineType({
   name: "treatment",
   title: "Zabieg",
@@ -26,23 +28,13 @@ export default defineType({
       name: "summary",
       title: "Podsumowanie",
       type: "string",
-      validation: (Rule) =>
-        Rule.custom((value) => {
-          if (!value || value.trim() === "") {
-            return "Proszę uzupełnić pole.";
-          }
-
-          if (value.length > 290) {
-            return `Maksymalna długość tekstu to 290 znaków. Aktualna długość to ${value.length} znaków.`;
-          }
-          return true;
-        }),
+      validation: (Rule) => Rule.custom(lengthValidatorWithLength(290)),
     }),
     defineField({
-      name: "treatmentGroup",
-      title: "Grupa zabiegowa",
+      name: "treatmentCategory",
+      title: "Kategoria zabiegowa",
       type: "reference",
-      to: { type: "treatmentGroup" },
+      to: { type: "treatmentCategory" },
       validation: (Rule) => Rule.required().error("Proszę wybrać jedną opcję."),
     }),
     defineField({
@@ -58,18 +50,7 @@ export default defineType({
       name: "altForMainImage",
       title: "Opis głównej grafiki",
       type: "string",
-      validation: (Rule) =>
-        Rule.custom((value) => {
-          if (!value || value.trim() === "") {
-            return "Proszę uzupełnić pole.";
-          }
-
-          if (!/\.\s*$/.test(value)) {
-            return "Opis powinien kończyć się kropką.";
-          }
-
-          return true;
-        }),
+      validation: (Rule) => Rule.custom(altValidator),
     }),
     defineField({
       name: "description",

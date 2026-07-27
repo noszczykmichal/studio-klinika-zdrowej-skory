@@ -1,5 +1,7 @@
 import { defineType, defineField, defineArrayMember } from "sanity";
 
+import { altValidator } from "@/utils/validators";
+
 export default defineType({
   name: "gallery",
   title: "Galeria zdjęć",
@@ -18,18 +20,7 @@ export default defineType({
               name: "alt",
               title: "Tekst alternatywny",
               type: "string",
-              validation: (Rule) =>
-                Rule.custom((value) => {
-                  if (!value || value.trim() === "") {
-                    return "Proszę uzupełnić pole.";
-                  }
-
-                  if (!/\.\s*$/.test(value)) {
-                    return "Opis powinien kończyć się kropką.";
-                  }
-
-                  return true;
-                }),
+              validation: (Rule) => Rule.custom(altValidator),
             }),
           ],
         }),
