@@ -5,7 +5,10 @@ import { getValidator } from "@/utils/testUtils";
 
 describe("Post Schema Validation", () => {
   describe("treatmentGroup field", () => {
-    const validateTreatmentGroup = getValidator(postSchema, "treatmentGroup");
+    const validateTreatmentCategory = getValidator(
+      postSchema,
+      "treatmentCategory",
+    );
 
     it("should return an error if both treatmentGroup and treatment are selected", () => {
       const mockValue = { _type: "reference", _ref: "group-123" };
@@ -15,12 +18,12 @@ describe("Post Schema Validation", () => {
         },
       };
 
-      expect(validateTreatmentGroup(mockValue, mockContext)).toBe(
-        'Proszę wypełnić tylko jedno pole - "Grupa zabiegowa" lub "Zabieg", nie oba jednocześnie.',
+      expect(validateTreatmentCategory(mockValue, mockContext)).toBe(
+        'Proszę wypełnić tylko jedno pole - "Kategoria zabiegowa" lub "Zabieg", nie oba jednocześnie.',
       );
     });
 
-    it("should return true if only treatmentGroup is selected", () => {
+    it("should return true if only treatmentCategory is selected", () => {
       const mockValue = { _type: "reference", _ref: "group-123" };
       const mockContext = {
         document: {
@@ -28,7 +31,7 @@ describe("Post Schema Validation", () => {
         },
       };
 
-      expect(validateTreatmentGroup(mockValue, mockContext)).toBe(true);
+      expect(validateTreatmentCategory(mockValue, mockContext)).toBe(true);
     });
 
     it("should return true if treatment is selected", () => {
@@ -38,7 +41,7 @@ describe("Post Schema Validation", () => {
         },
       };
 
-      expect(validateTreatmentGroup(undefined, mockContext)).toBe(true);
+      expect(validateTreatmentCategory(undefined, mockContext)).toBe(true);
     });
 
     it("should return an error if neither treatmentGroup nor treatment is selected", () => {
@@ -48,8 +51,8 @@ describe("Post Schema Validation", () => {
         },
       };
 
-      expect(validateTreatmentGroup(undefined, mockContext)).toBe(
-        'Proszę wypełnić jedno z pól - "Grupa zabiegowa" lub "Zabieg"',
+      expect(validateTreatmentCategory(undefined, mockContext)).toBe(
+        'Proszę wypełnić jedno z pól - "Kategoria zabiegowa" lub "Zabieg"',
       );
     });
   });

@@ -1,5 +1,10 @@
 import { defineField, defineType } from "sanity";
 
+import {
+  categoryAndTreatmentValidator,
+  altValidator,
+} from "@/utils/validators";
+
 export default defineType({
   name: "post",
   title: "Post",
@@ -28,16 +33,7 @@ export default defineType({
       type: "reference",
       to: { type: "treatmentCategory" },
       validation: (Rule) =>
-        Rule.custom((value, context) => {
-          const other = context.document?.treatment;
-          if (value && other) {
-            return 'Proszę wypełnić tylko jedno pole - "Grupa zabiegowa" lub "Zabieg", nie oba jednocześnie.';
-          } else if (!value && !other) {
-            return 'Proszę wypełnić jedno z pól - "Grupa zabiegowa" lub "Zabieg"';
-          }
-
-          return true;
-        }),
+        Rule.custom(categoryAndTreatmentValidator("treatment")),
     }),
     defineField({
       name: "treatment",
@@ -45,16 +41,7 @@ export default defineType({
       type: "reference",
       to: { type: "treatment" },
       validation: (Rule) =>
-        Rule.custom((value, context) => {
-          const other = context.document?.treatmentGroup;
-          if (value && other) {
-            return 'Proszę wypełnić tylko jedno pole - "Grupa zabiegowa" lub "Zabieg", nie oba jednocześnie.';
-          } else if (!value && !other) {
-            return 'Proszę wypełnić jedno z pól - "Grupa zabiegowa" lub "Zabieg"';
-          }
-
-          return true;
-        }),
+        Rule.custom(categoryAndTreatmentValidator("treatmentCategory")),
     }),
     defineField({
       name: "summary",
@@ -82,18 +69,7 @@ export default defineType({
       name: "altForMainImage",
       title: "Opis głównej grafiki",
       type: "string",
-      validation: (Rule) =>
-        Rule.custom((value) => {
-          if (!value || value.trim() === "") {
-            return "Proszę uzupełnić pole.";
-          }
-
-          if (!/\.\s*$/.test(value)) {
-            return "Opis powinien kończyć się kropką.";
-          }
-
-          return true;
-        }),
+      validation: (Rule) => Rule.custom(altValidator),
     }),
     defineField({
       name: "category",

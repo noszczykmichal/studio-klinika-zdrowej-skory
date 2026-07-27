@@ -1,5 +1,7 @@
 import { defineType, defineField } from "sanity";
 
+import { altValidator } from "@/utils/validators";
+
 export default defineType({
   type: "image",
   name: "blockContentImage",
@@ -9,18 +11,7 @@ export default defineType({
       name: "alt",
       type: "string",
       title: "Opis dla grafiki",
-      validation: (Rule) =>
-        Rule.custom((value) => {
-          if (!value || value.trim() === "") {
-            return "Proszę uzupełnić pole.";
-          }
-
-          if (!/\.\s*$/.test(value)) {
-            return "Opis powinien kończyć się kropką.";
-          }
-
-          return true;
-        }),
+      validation: (Rule) => Rule.custom(altValidator),
     }),
     defineField({
       name: "size",
