@@ -54,6 +54,27 @@ export default defineType({
               },
             ],
           },
+          {
+            title: "Text Color",
+            name: "textColor",
+            type: "object",
+            fields: [
+              {
+                title: "Color",
+                name: "color",
+                type: "color",
+                options: {
+                  disableCustomColors: true,
+                  disableAlpha: true,
+                  colorList: [
+                    { title: "Brand Primary (Magenta)", value: "#5b0547" },
+                    { title: "Brand Accent (Teal)", value: "#1F3B4D" },
+                    { title: "Warning (Gold)", value: "#B98A3D" },
+                  ],
+                },
+              },
+            ],
+          },
         ],
       },
     }),
