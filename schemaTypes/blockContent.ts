@@ -64,13 +64,8 @@ export default defineType({
                 name: "color",
                 type: "color",
                 options: {
-                  disableCustomColors: true,
                   disableAlpha: true,
-                  colorList: [
-                    { title: "Brand Primary (Magenta)", value: "#5b0547" },
-                    { title: "Brand Accent (Teal)", value: "#1F3B4D" },
-                    { title: "Warning (Gold)", value: "#B98A3D" },
-                  ],
+                  colorList: ["#5b0547", "#1F3B4D", "#B98A3D"],
                 },
               },
             ],
