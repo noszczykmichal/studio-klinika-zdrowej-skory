@@ -54,6 +54,22 @@ export default defineType({
               },
             ],
           },
+          {
+            title: "Text Color",
+            name: "textColor",
+            type: "object",
+            fields: [
+              {
+                title: "Color",
+                name: "color",
+                type: "color",
+                options: {
+                  disableAlpha: true,
+                  colorList: ["#5b0547", "#1F3B4D", "#B98A3D"],
+                },
+              },
+            ],
+          },
         ],
       },
     }),
