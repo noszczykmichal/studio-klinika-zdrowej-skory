@@ -1,10 +1,12 @@
 import { defineType, defineField } from "sanity";
 
 import { altValidator } from "@/utils/validators";
+import { ImageIcon } from "@sanity/icons/Image";
 
 export default defineType({
   type: "image",
   name: "blockContentImage",
+  icon: ImageIcon,
   options: { hotspot: true },
   fields: [
     defineField({

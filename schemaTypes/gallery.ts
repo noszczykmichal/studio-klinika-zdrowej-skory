@@ -1,10 +1,12 @@
 import { defineType, defineField, defineArrayMember } from "sanity";
 
 import { altValidator } from "@/utils/validators";
+import { ImagesIcon } from "@sanity/icons/Images";
 
 export default defineType({
   name: "gallery",
   title: "Galeria zdjęć",
+  icon: ImagesIcon,
   type: "object",
   fields: [
     defineField({
