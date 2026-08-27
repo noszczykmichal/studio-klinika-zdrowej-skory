@@ -1,4 +1,5 @@
 import { defineType, defineArrayMember } from "sanity";
+import { StringIcon } from "@sanity/icons/String";
 
 /**
  * This is the schema definition for the rich text fields used for
@@ -46,6 +47,8 @@ export default defineType({
             title: "Text Color",
             name: "textColor",
             type: "object",
+            // "Aa" glyph — used here for text color
+            icon: StringIcon,
             fields: [
               {
                 title: "Color",
@@ -61,9 +64,7 @@ export default defineType({
         ],
       },
     }),
-    // You can add additional types here. Note that you can't use
-    // primitive types such as 'string' and 'number' in the same array
-    // as a block type.
+
     defineArrayMember({
       type: "blockContentImage",
       title: "Zdjęcie",
