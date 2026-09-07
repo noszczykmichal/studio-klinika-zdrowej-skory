@@ -31,7 +31,10 @@ export default defineType({
         { title: "H4", value: "h4" },
         { title: "Cytowanie", value: "blockquote" },
       ],
-      lists: [{ title: "Lista", value: "bullet" }],
+      lists: [
+        { title: "Lista", value: "bullet" },
+        { title: "Lista numerowana", value: "number" },
+      ],
       // Marks let you mark up inline text in the block editor.
       marks: {
         // Decorators usually describe a single property – e.g. a typographic
