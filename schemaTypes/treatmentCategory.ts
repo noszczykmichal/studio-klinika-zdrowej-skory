@@ -1,12 +1,23 @@
 import { defineField, defineType } from "sanity";
 
 import "@/schemaTypes/blockContent";
-import { altValidator, lengthValidatorWithLength } from "@/utils/validators";
+import {
+  altValidator,
+  lengthValidatorWithLength,
+  orderAvailabilityValidator,
+} from "@/utils/validators";
 
 export default defineType({
   name: "treatmentCategory",
   title: "Kategoria zabiegowa",
   type: "document",
+  orderings: [
+    {
+      title: "Kolejność w nawigacji",
+      name: "orderAsc",
+      by: [{ field: "order", direction: "asc" }],
+    },
+  ],
   fields: [
     defineField({
       name: "title",
@@ -23,6 +34,13 @@ export default defineType({
         maxLength: 96,
       },
       validation: (Rule) => Rule.required().error("Proszę wygenerować pole!"),
+    }),
+    defineField({
+      name: "order",
+      title: "Kolejność w nawigacji",
+      type: "number",
+      validation: (Rule) =>
+        Rule.custom(orderAvailabilityValidator("treatmentCategory")),
     }),
     defineField({
       name: "summary",

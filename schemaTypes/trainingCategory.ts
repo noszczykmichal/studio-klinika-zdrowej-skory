@@ -39,7 +39,8 @@ export default defineType({
       name: "order",
       title: "Kolejność w nawigacji",
       type: "number",
-      validation: (Rule) => Rule.custom(orderAvailabilityValidator),
+      validation: (Rule) =>
+        Rule.custom(orderAvailabilityValidator("trainingCategory")),
     }),
     defineField({
       name: "summary",
