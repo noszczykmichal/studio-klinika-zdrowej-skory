@@ -37,36 +37,35 @@ const lengthValidatorWithLength =
     return true;
   };
 
-const orderAvailabilityValidator = async (
-  order: number | undefined,
-  context: ValidationContext,
-) => {
-  if (order === undefined) {
-    return "Proszę uzupełnić pole.";
-  } else if (!Number.isInteger(order)) {
-    return "Liczba musi być całkowita.";
-  } else if (order <= 0) {
-    return "Liczba musi być większa od zera.";
-  }
+const orderAvailabilityValidator =
+  (categoryName: "trainingCategory" | "treatmentCategory") =>
+  async (order: number | undefined, context: ValidationContext) => {
+    if (order === undefined) {
+      return "Proszę uzupełnić pole.";
+    } else if (!Number.isInteger(order)) {
+      return "Liczba musi być całkowita.";
+    } else if (order <= 0) {
+      return "Liczba musi być większa od zera.";
+    }
 
-  const { document, getClient } = context;
-  const client = getClient({ apiVersion: "2024-01-01" });
+    const { document, getClient } = context;
+    const client = getClient({ apiVersion: "2024-01-01" });
 
-  const id = document?._id?.replace(/^drafts\./, "");
+    const id = document?._id?.replace(/^drafts\./, "");
 
-  const duplicate = await client.fetch(
-    `count(*[
-            _type == "trainingCategory" &&
+    const duplicate = await client.fetch(
+      `count(*[
+            _type == $categoryName &&
             order == $order &&
             !(_id in [$id, "drafts." + $id])
           ])`,
-    { order, id },
-  );
+      { categoryName, order, id },
+    );
 
-  return duplicate > 0
-    ? "Ta pozycja jest już zajęta przez inną kategorię."
-    : true;
-};
+    return duplicate > 0
+      ? "Ta pozycja jest już zajęta przez inną kategorię."
+      : true;
+  };
 
 export {
   categoryAndTreatmentValidator,
