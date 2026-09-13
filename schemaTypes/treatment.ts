@@ -25,6 +25,25 @@ export default defineType({
       validation: (Rule) => Rule.required().error("Proszę wygenerować pole!"),
     }),
     defineField({
+      name: "metaDescription",
+      title: "Meta opis (SEO)",
+      type: "text",
+      rows: 3,
+      description:
+        "Opis wyświetlany w wynikach wyszukiwania Google pod tytułem strony. Zalecana długość: 120–160 znaków.",
+      validation: (Rule) =>
+        Rule.required()
+          .error("Proszę uzupełnić pole.")
+          .max(160)
+          .warning(
+            "Meta opis przekracza 160 znaków — Google może obciąć dodatkowy tekst w wynikach wyszukiwania.",
+          )
+          .min(50)
+          .warning(
+            "Meta opis jest bardzo krótki — warto rozwinąć go do co najmniej 50 znaków, aby lepiej wykorzystać przestrzeń w wynikach wyszukiwania.",
+          ),
+    }),
+    defineField({
       name: "summary",
       title: "Podsumowanie",
       type: "string",
