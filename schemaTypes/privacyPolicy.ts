@@ -1,5 +1,4 @@
 import { defineType, defineField } from "sanity";
-import { altValidator } from "@/utils/validators";
 
 export default defineType({
   name: "privacyPolicy",
@@ -12,19 +11,6 @@ export default defineType({
       type: "string",
       initialValue: "Polityka prywatności",
       validation: (Rule) => Rule.required(),
-    }),
-    defineField({
-      name: "mainImage",
-      title: "Główny obraz",
-      type: "image",
-      options: { hotspot: true },
-      validation: (Rule) => Rule.required().error("Proszę wybrać plik."),
-    }),
-    defineField({
-      name: "altForMainImage",
-      title: "Opis głównej grafiki",
-      type: "string",
-      validation: (Rule) => Rule.custom(altValidator),
     }),
     defineField({
       name: "policyContent",
