@@ -8,7 +8,8 @@ import trainingCategory from "@/schemaTypes/trainingCategory";
 import training from "@/schemaTypes/training";
 import gallery from "@/schemaTypes/gallery";
 import blockContentImage from "@/schemaTypes/blockContentImage";
-import tableWithCaption from "./tableWithCaption";
+import tableWithCaption from "@/schemaTypes/tableWithCaption";
+import privacyPolicy from "@/schemaTypes/privacy-policy";
 
 export const schemaTypes = [
   post,
@@ -22,4 +23,5 @@ export const schemaTypes = [
   gallery,
   blockContentImage,
   tableWithCaption,
+  privacyPolicy,
 ];
