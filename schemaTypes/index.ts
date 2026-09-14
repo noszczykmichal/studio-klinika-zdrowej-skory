@@ -9,7 +9,7 @@ import training from "@/schemaTypes/training";
 import gallery from "@/schemaTypes/gallery";
 import blockContentImage from "@/schemaTypes/blockContentImage";
 import tableWithCaption from "@/schemaTypes/tableWithCaption";
-import privacyPolicy from "@/schemaTypes/privacy-policy";
+import privacyPolicy from "@/schemaTypes/privacyPolicy";
 
 export const schemaTypes = [
   post,
