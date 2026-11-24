@@ -20,6 +20,10 @@ Sanity project `ddh0mvo4`, dataset `production` (hardcoded in [sanity.config.ts]
 
 CI ([.github/workflows/deploy.yml](.github/workflows/deploy.yml)) runs lint → typecheck → tests → build on pushes to any branch and on PRs to `dev`/`main`; only pushes to `main` run `sanity deploy`. Feature branches merge into `dev`, which goes to `main` via PR.
 
+## Pull requests
+
+When writing a PR summary/description, always output it as raw Markdown inside a fenced ```` ```markdown ```` code block, so it can be copied straight into GitHub with formatting intact.
+
 ## Architecture
 
 - **Path alias `@/` → repo root.** Configured twice: in the Vite config inside [sanity.cli.ts](sanity.cli.ts) (for the Studio) and in [vitest.config.mts](vitest.config.mts) (for tests). Keep both in sync.
