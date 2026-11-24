@@ -3,11 +3,8 @@ name: CI/CD Pipeline
 on:
   push:
     branches:
-      - "**"
-  pull_request:
-    branches:
-      - dev
       - main
+  pull_request:
 
 permissions:
   contents: read

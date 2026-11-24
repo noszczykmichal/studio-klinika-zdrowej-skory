@@ -18,7 +18,7 @@ Sanity project `ddh0mvo4`, dataset `production` (hardcoded in [sanity.config.ts]
 - `npm run typecheck` — `tsc --noEmit`
 - Install: CI uses plain `npm ci` (no `--legacy-peer-deps`). If a dependency bump causes an `ERESOLVE` peer conflict, resolve it (upgrade/`overrides`) rather than re-adding the flag.
 
-CI ([.github/workflows/deploy.yml](.github/workflows/deploy.yml)) runs lint → typecheck → tests → build on pushes to any branch and on PRs to `dev`/`main`; only pushes to `main` run `sanity deploy`. Feature branches merge into `dev`, which goes to `main` via PR.
+CI ([.github/workflows/deploy.yml](.github/workflows/deploy.yml)) runs lint → typecheck → tests → build on every pull request and on pushes to `main`; only pushes to `main` run `sanity deploy`. Workflow: create a feature branch, open a PR (draft is fine) to get CI, merge into `main`. `main` is protected by a ruleset (PR + passing `test_and_deploy` check required, no direct pushes). The `dev` branch is legacy.
 
 ## Pull requests
 
