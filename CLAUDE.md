@@ -14,10 +14,11 @@ Sanity project `ddh0mvo4`, dataset `production` (hardcoded in [sanity.config.ts]
 - `npm run build` — production build (also used in CI as a type/config check)
 - `npm test` — Vitest in watch mode; `npm test -- --run` for a single run (what CI uses)
 - Single file / single test: `npx vitest run tests/schemaTypes/treatment.test.ts` or `npx vitest run -t "altForMainImage"`
-- Lint (no npm script): `npx eslint .`
-- Install: CI uses `npm install --legacy-peer-deps`; do the same if peer-dep conflicts occur.
+- `npm run lint` — ESLint (`@sanity/eslint-config-studio`)
+- `npm run typecheck` — `tsc --noEmit`
+- Install: CI uses plain `npm ci` (no `--legacy-peer-deps`). If a dependency bump causes an `ERESOLVE` peer conflict, resolve it (upgrade/`overrides`) rather than re-adding the flag.
 
-CI ([.github/workflows/deploy.yml](.github/workflows/deploy.yml)) runs tests + build on pushes/PRs to `dev` and `main`; only pushes to `main` run `sanity deploy`. Work happens on `dev`, PRs go to `main`.
+CI ([.github/workflows/deploy.yml](.github/workflows/deploy.yml)) runs lint → typecheck → tests → build on pushes to any branch and on PRs to `dev`/`main`; only pushes to `main` run `sanity deploy`. Feature branches merge into `dev`, which goes to `main` via PR.
 
 ## Architecture
 
